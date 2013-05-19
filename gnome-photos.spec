@@ -1,11 +1,11 @@
 Summary:	Access, organize and share your photos on GNOME
 Name:		gnome-photos
-Version:	3.8.0
+Version:	3.8.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	656393dba6cdc320bf9d7ca4d745fb5c
+# Source0-md5:	34649a651577c51cd52e28c5e3ca8678
 URL:		https://live.gnome.org/GnomePhotos
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
