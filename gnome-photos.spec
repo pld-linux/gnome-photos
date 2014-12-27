@@ -1,11 +1,11 @@
 Summary:	Access, organize and share your photos on GNOME
 Name:		gnome-photos
-Version:	3.12.1
+Version:	3.14.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	f1480bec5b07d86ed45a9d667677db1e
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.14/%{name}-%{version}.tar.xz
+# Source0-md5:	494ef47076725305fdcb46fb690e3604
 URL:		https://live.gnome.org/GnomePhotos
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
@@ -17,7 +17,7 @@ BuildRequires:	gdk-pixbuf2-devel
 BuildRequires:	gegl-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gfbgraph-devel > 0.2.1
-BuildRequires:	glib2-devel >= 1:2.36.0
+BuildRequires:	glib2-devel >= 1:2.40.0
 BuildRequires:	gnome-common
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	gnome-online-accounts-devel >= 3.8.0
@@ -26,15 +26,18 @@ BuildRequires:	gtk+3-devel >= 3.11.5
 BuildRequires:	intltool >= 0.50.1
 BuildRequires:	lcms2-devel
 BuildRequires:	libexif-devel >= 0.6.14
+BuildRequires:	libgdata-devel >= 0.16.0
 BuildRequires:	librsvg-devel >= 2.26.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	tracker-devel >= 1.0.0
+BuildRequires:	yelp-tools
 BuildRequires:	zlib-devel
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	glib2 >= 1:2.26.0
-Requires:	glib2 >= 1:2.36.0
+Requires:	glib2 >= 1:2.40.0
 Requires:	gtk+3 >= 3.11.5
+Requires:	libgdata >= 0.16.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -71,21 +74,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %glib_compile_schemas
+%update_icon_cache HighContrast
 %update_icon_cache hicolor
 
 %postun
 %glib_compile_schemas
+%update_icon_cache HighContrast
 %update_icon_cache hicolor
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc ARTISTS AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/gnome-photos
-%attr(755,root,root) %{_libdir}/gnome-photos-service
 %{_datadir}/appdata/org.gnome.Photos.appdata.xml
 %{_datadir}/dbus-1/services/org.gnome.Photos.service
 %{_datadir}/glib-2.0/schemas/org.gnome.photos.gschema.xml
 %{_datadir}/gnome-shell/search-providers/org.gnome.Photos.search-provider.ini
+%{_iconsdir}/HighContrast/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.png
-%{_datadir}/%{name}
 %{_desktopdir}/org.gnome.Photos.desktop
