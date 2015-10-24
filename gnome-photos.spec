@@ -14,7 +14,7 @@ BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	exempi-devel >= 1.99.5
 BuildRequires:	gdk-pixbuf2-devel
-BuildRequires:	gegl-devel
+BuildRequires:	gegl-devel >= 0.3.0
 BuildRequires:	gettext-tools
 BuildRequires:	gfbgraph-devel > 0.2.1
 BuildRequires:	glib2-devel >= 1:2.40.0
