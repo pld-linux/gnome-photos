@@ -1,32 +1,35 @@
 Summary:	Access, organize and share your photos on GNOME
 Name:		gnome-photos
-Version:	3.18.1
+Version:	3.20.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.18/%{name}-%{version}.tar.xz
-# Source0-md5:	84565fca526d3cc778741f7dcf9a30e0
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.20/%{name}-%{version}.tar.xz
+# Source0-md5:	307b9396d220f37137ec68e570c0df46
 URL:		https://live.gnome.org/GnomePhotos
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
 BuildRequires:	babl-devel
-BuildRequires:	cairo-devel
-BuildRequires:	cairo-gobject-devel
+BuildRequires:	cairo-devel >= 1.14.0
+BuildRequires:	cairo-gobject-devel >= 1.14.0
 BuildRequires:	exempi-devel >= 1.99.5
 BuildRequires:	gdk-pixbuf2-devel
-BuildRequires:	gegl-devel >= 0.3.0
+BuildRequires:	gegl-devel >= 0.3.5
 BuildRequires:	gettext-tools
+BuildRequires:	gexiv2-devel
 BuildRequires:	gfbgraph-devel > 0.2.1
 BuildRequires:	glib2-devel >= 1:2.40.0
 BuildRequires:	gnome-common
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	gnome-online-accounts-devel >= 3.8.0
-BuildRequires:	grilo-devel >= 0.2.6
-BuildRequires:	gtk+3-devel >= 3.11.5
+BuildRequires:	grilo-devel >= 0.3.0
+BuildRequires:	gtk+3-devel >= 3.20.0
 BuildRequires:	intltool >= 0.50.1
 BuildRequires:	lcms2-devel
 BuildRequires:	libexif-devel >= 0.6.14
 BuildRequires:	libgdata-devel >= 0.16.0
+BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel >= 1.6
 BuildRequires:	librsvg-devel >= 2.26.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -36,7 +39,7 @@ BuildRequires:	zlib-devel
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	glib2 >= 1:2.40.0
-Requires:	gtk+3 >= 3.11.5
+Requires:	gtk+3 >= 3.20.0
 Requires:	libgdata >= 0.16.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
