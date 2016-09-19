@@ -1,11 +1,11 @@
 Summary:	Access, organize and share your photos on GNOME
 Name:		gnome-photos
-Version:	3.20.1
+Version:	3.22.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.20/%{name}-%{version}.tar.xz
-# Source0-md5:	4ec3434d6174f46581edbc5b92f4d68c
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.22/%{name}-%{version}.tar.xz
+# Source0-md5:	69b56da20ff597236792971fe143f37b
 URL:		https://live.gnome.org/GnomePhotos
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
@@ -18,7 +18,7 @@ BuildRequires:	gegl-devel >= 0.3.5
 BuildRequires:	gettext-tools
 BuildRequires:	gexiv2-devel
 BuildRequires:	gfbgraph-devel > 0.2.1
-BuildRequires:	glib2-devel >= 1:2.40.0
+BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gnome-common
 BuildRequires:	gnome-desktop-devel
 BuildRequires:	gnome-online-accounts-devel >= 3.8.0
@@ -38,7 +38,7 @@ BuildRequires:	yelp-tools
 BuildRequires:	zlib-devel
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	glib2 >= 1:2.26.0
-Requires:	glib2 >= 1:2.40.0
+Requires:	glib2 >= 1:2.44.0
 Requires:	gtk+3 >= 3.20.0
 Requires:	libgdata >= 0.16.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
