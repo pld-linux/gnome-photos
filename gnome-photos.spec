@@ -1,12 +1,12 @@
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	3.26.2
-Release:	6
+Version:	3.26.3
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Graphics
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.26/%{name}-%{version}.tar.xz
-# Source0-md5:	80a815e50a55ffe800d5b31b715aea07
+# Source0-md5:	ac4c9f62b9f1a1e110c4880e23e7724a
 URL:		https://live.gnome.org/GnomePhotos
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
