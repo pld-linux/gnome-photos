@@ -2,11 +2,12 @@ Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
 Version:	3.28.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Graphics
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.28/%{name}-%{version}.tar.xz
 # Source0-md5:	df4ba41fa6c38bf6f605aa2fef925928
+Patch0:		%{name}-gegl.patch
 URL:		https://live.gnome.org/GnomePhotos
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
@@ -16,7 +17,7 @@ BuildRequires:	cairo-gobject-devel >= 1.14.0
 BuildRequires:	desktop-file-utils
 BuildRequires:	exempi-devel >= 1.99.5
 BuildRequires:	gdk-pixbuf2-devel >= 2.32
-BuildRequires:	gegl-devel >= 0.3.28
+BuildRequires:	gegl-devel >= 0.4.0
 BuildRequires:	geocode-glib-devel
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	gexiv2-devel
@@ -43,7 +44,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	glib2 >= 1:2.44.0
 Requires:	cairo >= 1.14.0
 Requires:	cairo-gobject >= 1.14.0
-Requires:	gegl >= 0.3.28
+Requires:	gegl >= 0.4.0
 Requires:	gfbgraph >= 0.2.1
 Requires:	glib2 >= 1:2.44.0
 Requires:	gnome-online-accounts-libs >= 3.8.0
@@ -61,6 +62,7 @@ organizowanie i współdzielenie ich przy użyciu środowiska GNOME 3.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
