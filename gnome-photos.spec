@@ -1,13 +1,12 @@
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	3.28.0
-Release:	2
+Version:	3.30.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.28/%{name}-%{version}.tar.xz
-# Source0-md5:	df4ba41fa6c38bf6f605aa2fef925928
-Patch0:		%{name}-gegl.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.30/%{name}-%{version}.tar.xz
+# Source0-md5:	572b1e9901a236564acc8f93d14e51d4
 URL:		https://live.gnome.org/GnomePhotos
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
@@ -20,12 +19,12 @@ BuildRequires:	gdk-pixbuf2-devel >= 2.32
 BuildRequires:	gegl-devel >= 0.4.0
 BuildRequires:	geocode-glib-devel
 BuildRequires:	gettext-tools >= 0.19.8
-BuildRequires:	gexiv2-devel
+BuildRequires:	gexiv2-devel >= 0.10.8
 BuildRequires:	gfbgraph-devel >= 0.2.1
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gnome-desktop-devel >= 3.0
 BuildRequires:	gnome-online-accounts-devel >= 3.8.0
-BuildRequires:	grilo-devel >= 0.3.0
+BuildRequires:	grilo-devel >= 0.3.5
 BuildRequires:	gsettings-desktop-schemas-devel
 BuildRequires:	gtk+3-devel >= 3.22.16
 BuildRequires:	lcms2-devel
@@ -62,11 +61,10 @@ organizowanie i współdzielenie ich przy użyciu środowiska GNOME 3.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
-%{__aclocal} -I m4 -I libgd
+%{__aclocal} -I m4 -I subprojects/libgd
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -102,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc ARTISTS AUTHORS ChangeLog NEWS README
+%doc ARTISTS AUTHORS NEWS README
 %attr(755,root,root) %{_bindir}/gnome-photos
 %attr(755,root,root) %{_libexecdir}/gnome-photos-thumbnailer
 %{_datadir}/metainfo/org.gnome.Photos.appdata.xml
