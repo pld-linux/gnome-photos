@@ -1,54 +1,57 @@
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	3.30.1
+Version:	3.34.0
 Release:	1
-License:	GPL v2
+License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.30/%{name}-%{version}.tar.xz
-# Source0-md5:	572b1e9901a236564acc8f93d14e51d4
-URL:		https://live.gnome.org/GnomePhotos
-BuildRequires:	autoconf >= 2.63
-BuildRequires:	automake
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.34/%{name}-%{version}.tar.xz
+# Source0-md5:	a6e4431a15f617d26e346209129b313b
+URL:		https://wiki.gnome.org/Apps/Photos
 BuildRequires:	babl-devel
 BuildRequires:	cairo-devel >= 1.14.0
 BuildRequires:	cairo-gobject-devel >= 1.14.0
-BuildRequires:	desktop-file-utils
-BuildRequires:	exempi-devel >= 1.99.5
-BuildRequires:	gdk-pixbuf2-devel >= 2.32
+BuildRequires:	dbus-devel
+BuildRequires:	gdk-pixbuf2-devel >= 2.36.8
 BuildRequires:	gegl-devel >= 0.4.0
 BuildRequires:	geocode-glib-devel
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	gexiv2-devel >= 0.10.8
 BuildRequires:	gfbgraph-devel >= 0.2.1
-BuildRequires:	glib2-devel >= 1:2.44.0
-BuildRequires:	gnome-desktop-devel >= 3.0
+BuildRequires:	glib2-devel >= 1:2.57.2
 BuildRequires:	gnome-online-accounts-devel >= 3.8.0
 BuildRequires:	grilo-devel >= 0.3.5
 BuildRequires:	gsettings-desktop-schemas-devel
 BuildRequires:	gtk+3-devel >= 3.22.16
-BuildRequires:	lcms2-devel
 BuildRequires:	libdazzle-devel >= 3.26.0
 BuildRequires:	libexif-devel >= 0.6.14
 BuildRequires:	libgdata-devel >= 0.16.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 2:1.6
-BuildRequires:	librsvg-devel >= 2.26.0
-BuildRequires:	libtool >= 2:2
+BuildRequires:	meson >= 0.50.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	tracker-devel >= 2.0.0
+BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	tracker-devel >= 2.0
+BuildRequires:	xz
 BuildRequires:	yelp-tools
-BuildRequires:	zlib-devel
 Requires(post,postun):	gtk-update-icon-cache
-Requires(post,postun):	glib2 >= 1:2.44.0
+Requires(post,postun):	glib2 >= 1:2.57.2
 Requires:	cairo >= 1.14.0
 Requires:	cairo-gobject >= 1.14.0
+Requires:	gdk-pixbuf2 >= 2.36.8
 Requires:	gegl >= 0.4.0
+Requires:	gexiv2 >= 0.10.8
 Requires:	gfbgraph >= 0.2.1
-Requires:	glib2 >= 1:2.44.0
+Requires:	glib2 >= 1:2.57.2
 Requires:	gnome-online-accounts-libs >= 3.8.0
+Requires:	grilo >= 0.3.5
+Requires:	gsettings-desktop-schemas
 Requires:	gtk+3 >= 3.22.16
+Requires:	libdazzle >= 3.26.0
 Requires:	libgdata >= 0.16.0
+Requires:	tracker >= 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -63,25 +66,17 @@ organizowanie i współdzielenie ich przy użyciu środowiska GNOME 3.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal} -I m4 -I subprojects/libgd
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--disable-silent-rules
+%meson build
 
-%{__make}
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
+# packaged as %doc
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
-
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/help/fur
 
 %find_lang %{name} --with-gnome
 
@@ -90,12 +85,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %glib_compile_schemas
-%update_icon_cache HighContrast
 %update_icon_cache hicolor
 
 %postun
 %glib_compile_schemas
-%update_icon_cache HighContrast
 %update_icon_cache hicolor
 
 %files -f %{name}.lang
@@ -103,10 +96,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc ARTISTS AUTHORS NEWS README
 %attr(755,root,root) %{_bindir}/gnome-photos
 %attr(755,root,root) %{_libexecdir}/gnome-photos-thumbnailer
-%{_datadir}/metainfo/org.gnome.Photos.appdata.xml
+%dir %{_libdir}/gnome-photos
+%attr(755,root,root) %{_libdir}/gnome-photos/libgnome-photos.so
 %{_datadir}/dbus-1/services/org.gnome.Photos.service
 %{_datadir}/glib-2.0/schemas/org.gnome.photos.gschema.xml
 %{_datadir}/gnome-shell/search-providers/org.gnome.Photos.search-provider.ini
-%{_iconsdir}/hicolor/*/*/*.png
-%{_iconsdir}/hicolor/*/*/*.svg
+%{_datadir}/metainfo/org.gnome.Photos.appdata.xml
 %{_desktopdir}/org.gnome.Photos.desktop
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Photos.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.Photos-symbolic.svg
