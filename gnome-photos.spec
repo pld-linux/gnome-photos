@@ -1,12 +1,12 @@
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	3.34.2
+Version:	3.38.0
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.34/%{name}-%{version}.tar.xz
-# Source0-md5:	1dd0d477eac4707e8cfe9f35e26d1f29
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.38/%{name}-%{version}.tar.xz
+# Source0-md5:	47811b60cd400ff15d73600fca03e998
 URL:		https://wiki.gnome.org/Apps/Photos
 BuildRequires:	babl-devel
 BuildRequires:	cairo-devel >= 1.14.0
@@ -99,9 +99,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnome-photos
 %attr(755,root,root) %{_libdir}/gnome-photos/libgnome-photos.so
 %{_datadir}/dbus-1/services/org.gnome.Photos.service
+%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker1.service
+%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker1.Miner.Extract.service
+%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker1.Miner.Files.service
 %{_datadir}/glib-2.0/schemas/org.gnome.photos.gschema.xml
 %{_datadir}/gnome-shell/search-providers/org.gnome.Photos.search-provider.ini
 %{_datadir}/metainfo/org.gnome.Photos.appdata.xml
+%{_datadir}/tracker/domain-ontologies/org.gnome.Photos.rule
+%{_datadir}/tracker/miners/org.gnome.Photos.Tracker1.Miner.Extract.service
+%{_datadir}/tracker/miners/org.gnome.Photos.Tracker1.Miner.Files.service
 %{_desktopdir}/org.gnome.Photos.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Photos.svg
 %{_iconsdir}/hicolor/symbolic/apps/org.gnome.Photos-symbolic.svg
