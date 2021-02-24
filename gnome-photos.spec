@@ -1,12 +1,12 @@
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	3.38.0
+Version:	3.38.1
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-photos/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	47811b60cd400ff15d73600fca03e998
+Source0:	https://download.gnome.org/sources/gnome-photos/3.38/%{name}-%{version}.tar.xz
+# Source0-md5:	96f87446e960eff4e7d0a4a112181f6b
 URL:		https://wiki.gnome.org/Apps/Photos
 BuildRequires:	babl-devel
 BuildRequires:	cairo-devel >= 1.14.0
