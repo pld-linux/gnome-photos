@@ -1,12 +1,16 @@
+#
+# Conditional build:
+%bcond_without	tracker	# Tracker3 support
+
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	3.38.1
+Version:	40.0
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	https://download.gnome.org/sources/gnome-photos/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	96f87446e960eff4e7d0a4a112181f6b
+Source0:	https://download.gnome.org/sources/gnome-photos/40/%{name}-%{version}.tar.xz
+# Source0-md5:	22c5a55020e6b5d05fa93552f56db1c8
 URL:		https://wiki.gnome.org/Apps/Photos
 BuildRequires:	babl-devel
 BuildRequires:	cairo-devel >= 1.14.0
@@ -18,40 +22,43 @@ BuildRequires:	geocode-glib-devel
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	gexiv2-devel >= 0.10.8
 BuildRequires:	gfbgraph-devel >= 0.2.1
-BuildRequires:	glib2-devel >= 1:2.57.2
+BuildRequires:	glib2-devel >= 1:2.62.0
 BuildRequires:	gnome-online-accounts-devel >= 3.8.0
 BuildRequires:	grilo-devel >= 0.3.5
 BuildRequires:	gsettings-desktop-schemas-devel
 BuildRequires:	gtk+3-devel >= 3.22.16
 BuildRequires:	libdazzle-devel >= 3.26.0
 BuildRequires:	libexif-devel >= 0.6.14
-BuildRequires:	libgdata-devel >= 0.16.0
+BuildRequires:	libgdata-devel >= 0.17.13
+BuildRequires:	libhandy1-devel >= 1.1.90
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 2:1.6
+BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	tracker-devel >= 2.0
+%{?with_tracker:BuildRequires:	tracker3-devel >= 3.0}
 BuildRequires:	xz
 BuildRequires:	yelp-tools
+Requires(post,postun):	glib2 >= 1:2.62.0
 Requires(post,postun):	gtk-update-icon-cache
-Requires(post,postun):	glib2 >= 1:2.57.2
 Requires:	cairo >= 1.14.0
 Requires:	cairo-gobject >= 1.14.0
 Requires:	gdk-pixbuf2 >= 2.36.8
 Requires:	gegl >= 0.4.0
 Requires:	gexiv2 >= 0.10.8
 Requires:	gfbgraph >= 0.2.1
-Requires:	glib2 >= 1:2.57.2
+Requires:	glib2 >= 1:2.62.0
 Requires:	gnome-online-accounts-libs >= 3.8.0
 Requires:	grilo >= 0.3.5
 Requires:	gsettings-desktop-schemas
 Requires:	gtk+3 >= 3.22.16
 Requires:	libdazzle >= 3.26.0
-Requires:	libgdata >= 0.16.0
-Requires:	tracker >= 2.0
+Requires:	libgdata >= 0.17.13
+Requires:	libhandy1 >= 1.1.90
+%{?with_tracker:Requires:	tracker3 >= 3.0}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -66,7 +73,10 @@ organizowanie i współdzielenie ich przy użyciu środowiska GNOME 3.
 %setup -q
 
 %build
-%meson build
+# flatpak option just enables tracker support(?)
+%meson build \
+	%{?with_tracker:-Dflatpak=true} \
+	-Dmanuals=true
 
 %ninja_build -C build
 
@@ -99,15 +109,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnome-photos
 %attr(755,root,root) %{_libdir}/gnome-photos/libgnome-photos.so
 %{_datadir}/dbus-1/services/org.gnome.Photos.service
-%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker1.service
-%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker1.Miner.Extract.service
-%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker1.Miner.Files.service
 %{_datadir}/glib-2.0/schemas/org.gnome.photos.gschema.xml
 %{_datadir}/gnome-shell/search-providers/org.gnome.Photos.search-provider.ini
 %{_datadir}/metainfo/org.gnome.Photos.appdata.xml
-%{_datadir}/tracker/domain-ontologies/org.gnome.Photos.rule
-%{_datadir}/tracker/miners/org.gnome.Photos.Tracker1.Miner.Extract.service
-%{_datadir}/tracker/miners/org.gnome.Photos.Tracker1.Miner.Files.service
 %{_desktopdir}/org.gnome.Photos.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.Photos.svg
 %{_iconsdir}/hicolor/symbolic/apps/org.gnome.Photos-symbolic.svg
+%{_mandir}/man1/gnome-photos.1*
+%if %{with tracker}
+%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker3.Miner.Extract.service
+%{_datadir}/dbus-1/services/org.gnome.Photos.Tracker3.Miner.Files.service
+%{_datadir}/tracker3-miners/domain-ontologies/org.gnome.Photos.rule
+%endif
