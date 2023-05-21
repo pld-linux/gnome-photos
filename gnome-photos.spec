@@ -5,34 +5,34 @@
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	40.0
-Release:	2
+Version:	43.0
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	https://download.gnome.org/sources/gnome-photos/40/%{name}-%{version}.tar.xz
-# Source0-md5:	22c5a55020e6b5d05fa93552f56db1c8
+Source0:	https://download.gnome.org/sources/gnome-photos/43/%{name}-%{version}.tar.xz
+# Source0-md5:	0f4ac865fe345c366e41e27ac0d6e3c1
+Patch0:		%{name}-babl.patch
 URL:		https://wiki.gnome.org/Apps/Photos
-BuildRequires:	babl-devel
+BuildRequires:	babl-devel >= 0.1
 BuildRequires:	cairo-devel >= 1.14.0
 BuildRequires:	cairo-gobject-devel >= 1.14.0
 BuildRequires:	dbus-devel
 BuildRequires:	gdk-pixbuf2-devel >= 2.36.8
 BuildRequires:	gegl-devel >= 0.4.0
-BuildRequires:	geocode-glib-devel
+BuildRequires:	geocode-glib2-devel
 BuildRequires:	gettext-tools >= 0.19.8
-BuildRequires:	gexiv2-devel >= 0.10.8
-BuildRequires:	gfbgraph-devel >= 0.2.1
+BuildRequires:	gexiv2-devel >= 0.14.0
 BuildRequires:	glib2-devel >= 1:2.62.0
 BuildRequires:	gnome-online-accounts-devel >= 3.8.0
-BuildRequires:	grilo-devel >= 0.3.5
 BuildRequires:	gsettings-desktop-schemas-devel
 BuildRequires:	gtk+3-devel >= 3.22.16
 BuildRequires:	libdazzle-devel >= 3.26.0
 BuildRequires:	libexif-devel >= 0.6.14
-BuildRequires:	libgdata-devel >= 0.17.13
 BuildRequires:	libhandy1-devel >= 1.1.90
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 2:1.6
+BuildRequires:	libportal-devel
+BuildRequires:	libportal-gtk3-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.50.0
 BuildRequires:	ninja >= 1.5
@@ -48,15 +48,12 @@ Requires:	cairo >= 1.14.0
 Requires:	cairo-gobject >= 1.14.0
 Requires:	gdk-pixbuf2 >= 2.36.8
 Requires:	gegl >= 0.4.0
-Requires:	gexiv2 >= 0.10.8
-Requires:	gfbgraph >= 0.2.1
+Requires:	gexiv2 >= 0.14.0
 Requires:	glib2 >= 1:2.62.0
 Requires:	gnome-online-accounts-libs >= 3.8.0
-Requires:	grilo >= 0.3.5
 Requires:	gsettings-desktop-schemas
 Requires:	gtk+3 >= 3.22.16
 Requires:	libdazzle >= 3.26.0
-Requires:	libgdata >= 0.17.13
 Requires:	libhandy1 >= 1.1.90
 %{?with_tracker:Requires:	tracker3 >= 3.0}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,6 +68,7 @@ organizowanie i współdzielenie ich przy użyciu środowiska GNOME 3.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 # flatpak option just enables tracker support(?)

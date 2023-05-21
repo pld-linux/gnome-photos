@@ -1,0 +1,11 @@
+--- gnome-photos-43.0/meson.build.orig	2022-09-20 14:43:59.000000000 +0200
++++ gnome-photos-43.0/meson.build	2023-05-20 22:30:26.685445396 +0200
+@@ -152,7 +152,7 @@ libgd = subproject(
+ )
+ libgd_dep = libgd.get_variable('libgd_dep')
+ 
+-babl_dep = dependency('babl')
++babl_dep = dependency('babl-0.1')
+ cairo_dep = dependency('cairo', version: '>= 1.14.0')
+ gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: '>= 2.36.8')
+ gegl_dep = dependency('gegl-0.4', version: '>= 0.4.0')
