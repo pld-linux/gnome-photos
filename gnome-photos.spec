@@ -5,13 +5,12 @@
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	43.0
+Version:	43.1
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
 Source0:	https://download.gnome.org/sources/gnome-photos/43/%{name}-%{version}.tar.xz
-# Source0-md5:	0f4ac865fe345c366e41e27ac0d6e3c1
-Patch0:		%{name}-babl.patch
+# Source0-md5:	15c6fe7c543de147f3a63e6ba0d6837c
 URL:		https://wiki.gnome.org/Apps/Photos
 BuildRequires:	babl-devel >= 0.1
 BuildRequires:	cairo-devel >= 1.14.0
@@ -68,7 +67,6 @@ organizowanie i współdzielenie ich przy użyciu środowiska GNOME 3.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 # flatpak option just enables tracker support(?)
