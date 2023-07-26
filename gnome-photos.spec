@@ -1,16 +1,16 @@
 #
 # Conditional build:
-%bcond_without	tracker	# Tracker3 support
+%bcond_without	tracker	# Tracker3 miner support
 
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
-Version:	43.1
+Version:	44.0
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Graphics
-Source0:	https://download.gnome.org/sources/gnome-photos/43/%{name}-%{version}.tar.xz
-# Source0-md5:	15c6fe7c543de147f3a63e6ba0d6837c
+Source0:	https://download.gnome.org/sources/gnome-photos/44/%{name}-%{version}.tar.xz
+# Source0-md5:	cc756e9b5635c328affa600bd597a7ed
 URL:		https://wiki.gnome.org/Apps/Photos
 BuildRequires:	babl-devel >= 0.1
 BuildRequires:	cairo-devel >= 1.14.0
@@ -33,12 +33,12 @@ BuildRequires:	libpng-devel >= 2:1.6
 BuildRequires:	libportal-devel
 BuildRequires:	libportal-gtk3-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.50.0
+BuildRequires:	meson >= 0.60.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
-%{?with_tracker:BuildRequires:	tracker3-devel >= 3.0}
+BuildRequires:	tracker3-devel >= 3.0
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.62.0
@@ -83,6 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 
 # packaged as %doc
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+
+# not supported by glibc (as of 2.37)
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
 
 %find_lang %{name} --with-gnome
 
