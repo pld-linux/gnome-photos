@@ -1,12 +1,12 @@
 #
 # Conditional build:
-%bcond_without	tracker	# Tracker3 miner support
+%bcond_with	tracker	# Tracker3 miner support (for flatpak)
 
 Summary:	Access, organize and share your photos on GNOME
 Summary(pl.UTF-8):	Dostęp do zdjęć, organizowanie i współdzielenie ich w środowisku GNOME
 Name:		gnome-photos
 Version:	44.0
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		X11/Applications/Graphics
 Source0:	https://download.gnome.org/sources/gnome-photos/44/%{name}-%{version}.tar.xz
