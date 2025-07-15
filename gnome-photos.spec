@@ -70,16 +70,16 @@ organizowanie i współdzielenie ich przy użyciu środowiska GNOME 3.
 
 %build
 # flatpak option just enables tracker support(?)
-%meson build \
+%meson \
 	%{?with_tracker:-Dflatpak=true} \
 	-Dmanuals=true
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 # packaged as %doc
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
