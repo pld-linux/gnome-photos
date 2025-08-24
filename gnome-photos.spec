@@ -36,7 +36,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.60.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	tracker3-devel >= 3.0
 BuildRequires:	xz
